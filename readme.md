@@ -1,8 +1,8 @@
 # Dotfiles Kit
 
-This is a starting point for a dotfiles repo, it uses [Oh My Zsh](https://ohmyz.sh/) and the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) theme.
+This is a starting point for creating your own dotfiles repo, it uses [Oh My Zsh](https://ohmyz.sh/) and the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) theme.
 
-It is based heavily on my own dotfiles repo with a lot of the personalization, banner, aliases etc removed.
+It is based heavily on my own dotfiles repo with a lot of the personalization & aliases etc removed.
 
 ## File Index
 
@@ -22,11 +22,13 @@ It is based heavily on my own dotfiles repo with a lot of the personalization, b
 
 ## Usage
 
+💥 FIRST! FORK THIS REPO! DON'T TRY TO USE A CLONE. If you insist on cloning it, remove the origin remote to disconnect from my GitHub
+
 Clone into `~/dotfiles`
 
 ```bash
 cd ~
-git clone https://github.com/benc-uk/dotfiles-kit.git dotfiles
+git clone https://github.com/<you>/dotfiles-kit.git dotfiles
 ```
 
 Install zsh if it's not already installed
@@ -36,11 +38,11 @@ cd ~
 ./dotfiles/install-zsh.sh
 ```
 
-Run install to set up the dotfiles symlinks etc
+Run main install script, to install p10k, omz & set up the dotfiles symlinks etc
 
 ```bash
 cd ~
 ./dotfiles/install.sh
 ```
 
-Place any secrets, and local overrides into `~/.local.rc` **DO NOT add this file to the dotfiles repo**
+Place any secrets, and local overrides into `~/.local.rc` **DO NOT add this file to the repo**

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd "$HOME"/dotfiles || exit
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+cd "$DIR" || exit
 
 echo -e "\e[34m»»» 📦 \e[32mBacking up dotfiles repo to GitHub\e[0m"
 
