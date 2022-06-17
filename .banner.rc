@@ -1,0 +1,11 @@
+# ===================================================
+# Banner shown at login. Change as you wish or empty
+# ===================================================
+
+# And what shell is in use (default assume Zsh + P10K)
+shelltype="🚀 Oh My Zsh \e[37m& \e[38;5;226mPowerlevel10K"
+
+if [[ $0 =~ "bash" ]]; then shelltype="🐚 Standard Bash Shell"; fi
+
+# Show the banner
+echo -e "\e[38;5;192m»»» You are running: \e[38;5;202m$shelltype"
