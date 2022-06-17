@@ -51,7 +51,7 @@ fi
 
 # Create symlinks for all dotfiles and bin directory
 echo -e "\n\e[38;5;45m»»» Creating dotfile symlinks \e[0m"
-for f in .zshrc .p10k.zsh .gitconfig .profile .bashrc .aliases.rc .banner.rc bin
+for f in .zshrc .p10k.zsh .gitconfig .profile .bashrc .aliases.rc .banner.rc
 do
   echo -e "\e[38;5;45m»»» 📃  ~/$f --> $DOTFILE_DIR/$f"
   rm -rf "$HOME"/$f

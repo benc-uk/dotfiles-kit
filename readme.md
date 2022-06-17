@@ -26,7 +26,7 @@ Clone into `~/dotfiles`
 
 ```bash
 cd ~
-git clone https://github.com/benc-uk/dotfiles.git
+git clone https://github.com/benc-uk/dotfiles-kit.git dotfiles
 ```
 
 Install zsh if it's not already installed
