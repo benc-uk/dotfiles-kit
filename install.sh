@@ -36,15 +36,25 @@ fi
 
 # if gitconfig exists, save it
 if [ -f "$HOME"/.gitconfig ]; then
-  echo -e "\e[38;5;45m»»» 🧪 \e[32mFound existing .gitconfig, using existing file contents\n\e[0m"
+  echo -e "\e[38;5;45m»»» 🧪 \e[32mFound existing .gitconfig, using existing file contents\e[0m"
   cp "$HOME"/.gitconfig .gitconfig
+fi
+
+set -e
+
+# check if zsh is installed
+if [ -f /bin/zsh ]; then
+  echo -e "\e[38;5;45m»»» 🐚 \e[32mFound zsh, this is good 😄\e[0m"
+else
+  echo -e "\e[38;5;45m»»» 🐚 \e[31mZsh is not installed 😥 Will try to install it with apt\e[0m"
+  sudo apt-get install -y -qq zsh
+  echo -e "\e[38;5;45m»»» 🐚 \e[31mNOTE! To change the default shell to zsh run:\e[0m chsh -s /usr/bin/zsh \$USER"
 fi
 
 # Enable oh-my-zsh and p10k
 if [ -f "/bin/zsh" ]; then
   echo -e "\e[38;5;45m»»» Zsh detected, setting up oh-my-zsh and powerlevel10k \e[0m"
   rm -rf "$HOME"/.oh-my-zsh
-  set -e
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME"/.oh-my-zsh/custom/themes/powerlevel10k
   touch "$HOME"/.z
@@ -54,16 +64,16 @@ fi
 echo -e "\n\e[38;5;45m»»» Creating dotfile symlinks \e[0m"
 for f in .zshrc .p10k.zsh .gitconfig .profile .bashrc .aliases.rc .banner.rc
 do
-  echo -e "\e[38;5;45m»»» 📃  ~/$f --> $DOTFILE_DIR/$f"
+  echo -e "\e[38;5;45m»»» 📃  ~/$f \e[0m--> \e[38;5;46m$DOTFILE_DIR/$f\e[0m"
   rm -rf "$HOME"/$f
   ln -s "$DOTFILE_DIR"/$f "$HOME"/$f
 done
 
 # Create symlinks for env file, depending on zsh or bash
 rm -f "$HOME"/.bashenv "$HOME"/.zshenv
-echo -e "\e[38;5;45m»»» 📃  ~/.bashenv --> $DOTFILE_DIR/.env.rc "
+echo -e "\e[38;5;45m»»» 📃  ~/.bashenv \e[0m--> \e[38;5;46m$DOTFILE_DIR/.env.rc \e[0m"
 ln -s "$DOTFILE_DIR"/.env.rc "$HOME"/.bashenv
-echo -e "\e[38;5;45m»»» 📃  ~/.zshenv --> $DOTFILE_DIR/.env.rc "
+echo -e "\e[38;5;45m»»» 📃  ~/.zshenv \e[0m--> \e[38;5;46m$DOTFILE_DIR/.env.rc \e[0m"
 ln -s "$DOTFILE_DIR"/.env.rc "$HOME"/.zshenv
 
 # If .local.rc doesn't exist, create it
