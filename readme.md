@@ -6,6 +6,15 @@ It is based heavily on my own dotfiles repo with a lot of the personalization & 
 
 ## Dotfiles Repo - What & Why
 
+Storing your dotfiles on GitHub provides many advantages:
+
+- Backup of your most important files and personal customizations
+- As a developer your personalized fine tuned shell experience is key to productivity
+- Take all your familiar preferences, aliases, scripts, env vars and configurations anywhere
+- Work the same way locally, in a cloud shell, in VSCode Devconainers, in CodeSpaces, on remote SSH hosts etc etc.
+
+This guide has some great information: https://dotfiles.github.io/
+
 ## File Index
 
 - `.aliases.rc` – All aliases go here (used with Bash and Zsh)
@@ -13,14 +22,14 @@ It is based heavily on my own dotfiles repo with a lot of the personalization & 
 - `.bashprompt.rc` – Bash prompt, like a poor mans p10k for Bash, disable with BASIC_PROMPT=1
 - `.bashrc` – Bash setup/startup script
 - `.env.rc` – Environmental vars and PATH settings, symlinked to `~/.bashenv` & `~/.zshenv`
-- `.gitconfig` – Git config
+- `.gitconfig.example` – Git config example, use as a reference
 - `.p10k.zsh` – Customized Powerlevel10k prompt settings
 - `.profile` – Untouched but synced just in case
 - `.zshrc` – Zsh setup/startup script, enables Oh My Zsh and Powerlevel10k
-- `backup.sh` – Git add, commit and push to GitHub
-- `install-zsh.sh` – Installs Zsh
-- `install.sh` – Main install script
-- `update.sh` – Pulls version from GitHub and overwrites local changes
+- `backup.sh` – Git add, commit and push to GitHub to backup everything :)
+- `install-zsh.sh` – Installs Zsh for you
+- `install.sh` – Main dotfile install script, run this on any new system you clone into
+- `update.sh` – Pulls latest version from GitHub and overwrites local changes
 
 ## Usage
 
@@ -30,7 +39,7 @@ Clone into `~/dotfiles`
 
 ```bash
 cd ~
-git clone https://github.com/<you>/dotfiles-kit.git dotfiles
+git clone https://github.com/<your-account>/dotfiles-kit.git dotfiles
 ```
 
 Install zsh if it's not already installed, there's a script to help but it won't change the default shell, you need to run `chsh` for that.
@@ -41,6 +50,7 @@ cd ~
 ```
 
 Now run main install script, which will install p10k, 'Oh My Zsh' & set up the various dotfiles symlinks etc
+If you have an existing `.gitconfig` in $HOME it will be copied to this repo and symlinked as well.
 
 ```bash
 cd ~

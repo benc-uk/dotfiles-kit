@@ -1,0 +1,26 @@
+# ===================================================
+# Some aliases you might find useful
+# 
+
+# Docker things
+alias docker-clean='docker rm -f $(docker ps -a -q)'
+alias docker-prune='docker container prune -f && docker image prune -f && docker volume prune -f && docker buildx prune -f'
+alias docker-wipe='docker-clean && docker buildx prune -a && docker image prune -a'
+
+# Azure things
+alias az-nuke='az group delete --no-wait --yes -g'
+alias azrg='az group list -o jsonc --query "[].name" -o tsv'
+alias az-switch='az account set -s $SOME_SUB_ID_HERE && echo "Switched to Azure sub: $(az account show --query name -o tsv)"'
+
+# Node
+alias npm-clean='rm -rf node_modules && rm -rf package-lock.json && npm install'
+
+# Kubernetes
+alias k='kubectl'
+alias kgp='kubectl get pods'
+alias kgs='kubectl get svc'
+alias kgn='kubectl get nodes'
+alias kga='kubectl get pods,svc,ing'
+alias klog='kubectl logs -f'
+alias kd='kubectl describe'
+alias kn='kubectl config set-context --current --namespace '
