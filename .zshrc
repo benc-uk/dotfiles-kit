@@ -38,7 +38,6 @@ source $ZSH/oh-my-zsh.sh
 # Load in dotfiles and customise the shell here
 # ===================================================
 
-# LS_COLORS
 LS_COLORS="ow=35:ln=31:di=32"
 export LS_COLORS
 

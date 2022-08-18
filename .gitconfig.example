@@ -1,21 +1,31 @@
-#[credential]
-#	helper = /mnt/c/Tools/gcmw-v1.20.0/git-credential-manager.exe
-#	#helper = /mnt/c/Tools/gcm/git-credential-manager-core.exe
-#[credential "https://dev.azure.com"]
-#	useHttpPath = true
+# ======================================================================================
+# This is a sample git configuration file. Take parts you like or ignore completely!
+# ======================================================================================
+
+# Change this of course!
 [user]
-	email = benc.uk@gmail.com
-	name = Ben Coleman
+	email = change_me@example.net
+	name = Change Me
+
+# Push pull preferences
 [push]
 	default = simple
 [pull]
 	rebase = false		
+
+# Use VS Code as default editor
 [core]
 	editor = code --wait
+
+# Prefer this rather than "master"
 [init]
 	defaultBranch = main
-[http]
-	cookiefile = /home/ben/.gitcookies
+
+# I like to use GitHub CLI `gh` as credential helper for github.com
+[credential "https://github.com"]
+	helper = !gh auth git-credential
+
+# These are some aliases I use with git
 [alias]
 	a = "!git add -A"
 	amend = "!git add -A && git commit --amend --no-edit"
@@ -51,6 +61,3 @@
 	unstage = "!git reset HEAD"
 
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
-[credential "https://github.com"]
-	helper = 
-	helper = !/home/ben/.local/bin/gh auth git-credential
