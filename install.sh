@@ -3,7 +3,7 @@
 echo -e "\n\e[38;5;135m╭───────────────────────────────────────────╮"
 echo -e "│\e[38;5;220m    Dotfiles, Oh My Zsh & P10k Installer \e[38;5;135m  │"
 echo -e "╰───────────────────────────────────────────╯"
-echo -e "\e[38;5;33mBen Coleman     \e[38;5;40mv1.0.7     🚀  🎁  💥\n"
+echo -e "\e[38;5;33mBen Coleman     \e[38;5;40mv1.1.0     🚀  🎁  💥\n"
 echo -e "\e[38;5;63m»»» 🙉\e[38;5;214m This script will remove & replace many of your personal dotfiles"
 echo -e "\e[38;5;63m»»» 🙊\e[38;5;214m If you have anything in these files, please back them up:"
 echo -e "\e[38;5;63m»»» 🙈   \e[37m.zshrc .zshenv .bashenv .p10k.zsh .gitconfig .profile .bashrc"
@@ -24,25 +24,27 @@ fi
 if [[ $CODESPACES ]]; then
   CONFIRM="0"
 fi
+if [[ $REMOTE_CONTAINERS ]]; then
+  CONFIRM="0" # This should detect if we are in a devcontainer
+fi
 
 # Confirm with the user
 if [[ "$CONFIRM" == "1" ]]; then
   read -p "Happy to proceed (y/N)? " -n 1 -r
   echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-      [[ "$0" = "$BASH_SOURCE" ]] && echo -e "\e[38;5;63m»»» 😇 \e[36mOK, exiting without making changes, bye!\n\e[0m" && exit 1 || return 1 
+    echo -e "\e[38;5;63m»»» 😇 \e[36mOK, exiting without making changes, bye!\n\e[0m" && exit 1 || return 1 
   fi
 fi
 
-# if gitconfig exists, save it
+# If gitconfig exists, do not replace it
 if [ -f "$HOME"/.gitconfig ]; then
-  echo -e "\e[38;5;45m»»» 🧪 \e[32mFound existing .gitconfig, using existing file contents\e[0m"
-  cp "$HOME"/.gitconfig .gitconfig
+  echo -e "\e[38;5;45m»»» 🧪 \e[32mFound existing .gitconfig, backing it up\n\e[0m"
+  mv "$HOME"/.gitconfig "$HOME"/.gitconfig-backup
+  cp "$DOTFILE_DIR"/.gitconfig "$HOME"/.gitconfig
 fi
 
-set -e
-
-# check if zsh is installed
+# Check if zsh is installed and try to install it
 if [ -f /bin/zsh ]; then
   echo -e "\e[38;5;45m»»» 🐚 \e[32mFound zsh, this is good 😄\e[0m"
 else
@@ -51,11 +53,14 @@ else
   echo -e "\e[38;5;45m»»» 🐚 \e[31mNOTE! To change the default shell to zsh run:\e[0m chsh -s /usr/bin/zsh \$USER"
 fi
 
+set -e
+
 # Enable oh-my-zsh and p10k
 if [ -f "/bin/zsh" ]; then
   echo -e "\e[38;5;45m»»» Zsh detected, setting up oh-my-zsh and powerlevel10k \e[0m"
   rm -rf "$HOME"/.oh-my-zsh
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  # Use a local copy of the install script, as the URL is blocked in some environments
+  "$DOTFILE_DIR"/install-oh-my-zsh.sh --unattended
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME"/.oh-my-zsh/custom/themes/powerlevel10k
   touch "$HOME"/.z
 fi

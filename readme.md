@@ -9,9 +9,9 @@ It is based heavily on my own dotfiles repo with a lot of the personalization & 
 Storing your dotfiles on GitHub provides many advantages:
 
 - Backup of your most important files and personal customizations
-- As a developer your personalized fine tuned shell experience is key to productivity
+- Having a personalized & carefully tuned shell experience is a massive productivity boost
 - Take all your familiar preferences, aliases, scripts, env vars and configurations anywhere
-- Work the same way locally, in a cloud shell, in VSCode Devconainers, in CodeSpaces, on remote SSH hosts etc etc.
+- Work the same way locally, in a cloud shell, in VSCode DevContainers, in CodeSpaces, on remote SSH hosts etc etc.
 
 This guide has some great information: https://dotfiles.github.io/
 
@@ -57,6 +57,9 @@ cd ~
 ./dotfiles/install.sh
 ```
 
-Place any secrets, and local overrides and anything else you don't want to be public into `~/.local.rc` **But DO NOT add this file to the repo or commit to git**
+## Local overrides & Secrets
+
+Place any secrets, and local overrides and anything else you don't want to be public into `~/.local.rc` this will be sourced by .zshrc or .bashrc  
+**But DO NOT add this file to the repo or commit to git**
 
 ## Backup & syncing changes
